@@ -23,7 +23,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#include "redpitaya/rp.h"
+
 
 #define I2C_SLAVE_FORCE 		   0x0706
 #define I2C_SLAVE    			   0x0703    /* Change slave address            */
@@ -93,7 +93,7 @@ while(1)
 	}
         usleep(1000000);
         }
-	rp_Release();
+
 
     return EXIT_SUCCESS;
 }
