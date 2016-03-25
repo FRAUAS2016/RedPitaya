@@ -23,7 +23,8 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 
- 
+#include "redpitaya/rp.h"
+
 #define I2C_SLAVE_FORCE 		   0x0706
 #define I2C_SLAVE    			   0x0703    /* Change slave address            */
 #define I2C_FUNCS    			   0x0705    /* Get the adapter functionality */
@@ -59,7 +60,8 @@ int main(int argc, char **argv)
 		printf("Unable to get bus access to talk to slave\n");
 		exit(1);
 	}
-
+while(1)
+{
 	buf[0] = 0;													// Commands for performing a ranging on the SRF08
 	buf[1] = 81;
 
@@ -68,7 +70,7 @@ int main(int argc, char **argv)
 		exit(1);
 	}
 
-	usleep(750000);												// this sleep waits for the ping to come back
+	usleep(70000);												// this sleep waits for the ping to come back
 
 	buf[0] = 0;													// This is the register we wish to read from
 
@@ -89,6 +91,9 @@ int main(int argc, char **argv)
 		printf("Light: %u \n", buf[1]);
 		printf("Range was: %u\n", result);
 	}
+        usleep(1000000);
+        }
+	rp_Release();
 
-	return 0;
+    return EXIT_SUCCESS;
 }
