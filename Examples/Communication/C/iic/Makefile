@@ -13,6 +13,7 @@ REVISION ?= devbuild
 CC = $(CROSS_COMPILE)gcc
 #Flags
 CFLAGS = -g -std=gnu99 -Wall -Werror
+CFLAGS += -I../../api/include
 #Objects
 OBJECTS = iic.o
 #Target file
