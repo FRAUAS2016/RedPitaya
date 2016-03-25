@@ -14,6 +14,7 @@ CC = $(CROSS_COMPILE)gcc
 #Flags
 CFLAGS = -g -std=gnu99 -Wall -Werror
 CFLAGS += -I../../api/include
+CFLAGS += -L ../../api/lib -lm -lpthread -lrp
 #Objects
 OBJECTS = iic.o
 #Target file
