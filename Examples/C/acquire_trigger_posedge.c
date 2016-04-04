@@ -21,7 +21,7 @@ int main(int argc, char **argv){
         rp_GenOutEnable(RP_CH_1);
 
 
-        uint32_t buff_size = 16384;
+        uint32_t buff_size = 4;
         float *buff = (float *)malloc(buff_size * sizeof(float));
 
         rp_AcqReset();
