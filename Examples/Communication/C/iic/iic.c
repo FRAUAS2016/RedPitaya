@@ -50,7 +50,6 @@ int main(int argc, char **argv)
 	char *fileName = "/dev/i2c-0";								// Name of the port we will be using
 	int  address = 0x70;										// Address of the SRF08 shifted right 1 bit
 	unsigned char buf[10];										// Buffer for data being read/ written on the i2c bus
-        int retries = 10;
 	if ((fd = open(fileName, O_RDWR)) < 0) {					// Open port for reading and writing
 		printf("Failed to open i2c port\n");
 		exit(1);
@@ -60,7 +59,7 @@ int main(int argc, char **argv)
 		printf("Unable to get bus access to talk to slave\n");
 		exit(1);
 	}
-while(retries--)
+while(1)
 {
 	buf[0] = 0;													// Commands for performing a ranging on the SRF08
 	buf[1] = 81;
