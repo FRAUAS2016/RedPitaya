@@ -1,6 +1,5 @@
 
-/* @brief This is a simple application for testing IIC communication on a RedPitaya
- * @Author Luka Golinar <luka.golinar@redpitaya.com>
+/* This code is sued for starting continous ranging on SRF02 sensor
  * 
  * (c) Red Pitaya  http://www.redpitaya.com
  *
@@ -31,27 +30,17 @@
 #define I2C_RDWR    			   0x0707    /* Combined R/W transfer (one stop only)*/
  
  
-/*
- * Page size of the EEPROM. This depends on the type of the EEPROM available
- * on board.
- */
- 
 
-/* Inline functions definition */
- 
-/*
- * File descriptors
- */
 int main(int argc, char **argv)
 {
-	printf("**** SRF08 test program ****\n");
+	printf("SRF02 Ranging program\n");
 
-	int fd;														// File descrition
-	char *fileName = "/dev/i2c-0";								// Name of the port we will be using
-	int  address = 0x70;										// Address of the SRF08 shifted right 1 bit
-	unsigned char buf[10];										// Buffer for data being read/ written on the i2c bus
+	int fd;										// File descrition
+	char *fileName = "/dev/i2c-0";							// Name of the port we will be using
+	int  address = 0x70;								// Address of the SRF08 shifted right 1 bit
+	unsigned char buf[10];								// Buffer for data being read/ written on the i2c bus
 	if ((fd = open(fileName, O_RDWR)) < 0) {					// Open port for reading and writing
-		printf("Failed to open i2c port\n");
+		printf("Cannot open i2c port\n");
 		exit(1);
 	}
 
@@ -61,24 +50,24 @@ int main(int argc, char **argv)
 	}
 while(1)
 {
-	buf[0] = 0;													// Commands for performing a ranging on the SRF08
+	buf[0] = 0;									// Commands for performing a ranging on the SRF02 in centimeters
 	buf[1] = 81;
 
-	if ((write(fd, buf, 2)) != 2) {								// Write commands to the i2c port
+	if ((write(fd, buf, 2)) != 2) {							// Write commands to the i2c port
 		printf("Error writing to i2c slave\n");
 		exit(1);
 	}
 
-	usleep(70000);												// this sleep waits for the ping to come back
+	usleep(70000);									// this sleep waits for the ping to come back. It should be greater than 65nS
 
-	buf[0] = 0;													// This is the register we wish to read from
+	buf[0] = 0;									// This is the register we wish to read from
 
-	if ((write(fd, buf, 1)) != 1) {								// Send register to read from
+	if ((write(fd, buf, 1)) != 1) {							// Send register to read from
 		printf("Error writing to i2c slave\n");
 		exit(1);
 	}
 
-	if (read(fd, buf, 4) != 4) {								// Read back data into buf[]
+	if (read(fd, buf, 4) != 4) {							// Read back data into buffer
 		printf("Unable to read from slave\n");
 		exit(1);
 	}
@@ -92,7 +81,7 @@ while(1)
 		printf("highbyte : ");
 		
 	}
-        usleep(1000000);
+        usleep(1000000);                                                                //Wait for 1 second to start next ranging
         }
 
 
