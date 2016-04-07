@@ -76,7 +76,6 @@ while(1)
 		unsigned char lowByte = buf[3];
 		unsigned int result = (highByte << 8) + lowByte;			// Calculate range
 		printf("Software v: %u \n", buf[0]);
-		printf("Light: %u \n", buf[1]);
 		printf("Range was: %u\n", result);
 		printf("highbyte : ");
 		
