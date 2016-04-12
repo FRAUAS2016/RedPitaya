@@ -77,7 +77,6 @@ while(1)
 		unsigned int result = (highByte << 8) + lowByte;			// Calculate range
 		printf("Software v: %u \n", buf[0]);
 		printf("Range was: %u\n", result);
-		printf("highbyte : ");
 		
 	}
         usleep(1000000);                                                                //Wait for 1 second to start next ranging
