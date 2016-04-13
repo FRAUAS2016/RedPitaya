@@ -58,7 +58,7 @@ while(1)
 		exit(1);
 	}
 
-	usleep(70000);									// this sleep waits for the ping to come back. It should be greater than 65nS
+	usleep(70000);									// this sleep waits for the ping to come back. It should be greater than 65mS
 
 	buf[0] = 0;									// This is the register we wish to read from
 
